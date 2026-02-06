@@ -21,13 +21,13 @@
 *  Permet d’utiliser Ergo-l sur PC Windows sur lequel on ne peut pas
 *  installer les drivers ergo-l https://github.com/Nuclear-Squid/ergol/releases/download/ergol-v1.0.0/ergol_kbd.exe
 *  et Kanata https://github.com/jtroo/kanata pour Arsenik https://github.com/OneDeadKey/arsenik/tree/main/kanata
-*   
+*
 *  Utilise la lib azerty de Parinacota (merci à lui) https://github.com/parinacota/qmk_firmware/tree/master/keyboards/unibody36tp/lib
 *  et l’implémentation QMK de Arsenik https://github.com/OneDeadKey/arsenik/tree/main/qmk
-* 
+*
 *  • Les layers Windows fournis par Keychron restent inchangés
 *  • Les Layers Mac sont remplacés par ERGO-L + Arsenik
-*   
+*
 *  Cela permet de rebasculer le clavier en configuration Windows
 *  standard avec le switch physique orange sur la tranche arrière du clavier
 *  Mac = Ergo-l pour Windows en Azerty
@@ -102,13 +102,13 @@ bool process_detected_host_os_kb(os_variant_t detected_os) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // les layers windows ne sont pas modifiés.
 // les layers MAC et tous les layers additonnels sont utilisés pour ERGO-L.
-// cela permet de remettre le clavier en configuration standard windows en 
+// cela permet de remettre le clavier en configuration standard windows en
 // sélectionnant le mode windows avec le switch physique orange sur la tranche arrière du clavier.
     [MAC_BASE] = LAYOUT_ansi_61(
         KC_ESC,   AZ_1,     AZ_2,     AZ_3,     AZ_4,     AZ_5,     AZ_6,     AZ_7,     AZ_8,     AZ_9,     AZ_0,     AZ_SLSH,  KC_EQL,   KC_BSPC,
-        KC_TAB,   AZ_Q,     AZ_C,     AZ_O,     AZ_P,     AZ_W,     AZ_J,     AZ_M,     AZ_D,     OSL(_1DK),AZ_Y,     AZ_LBRC,  AZ_RBRC,  AZ_BSLH, 
-        KC_CAPS,  AZ_A,     KC_SS,    KC_EE,    KC_NN,    AZ_F,     AZ_L,     KC_RR,    KC_TT,    KC_II,    LT(FUNC,KC_U),      AZ_QUOT,   KC_ENT, 
-        LM(_SHF, MOD_LSFT), AZ_Z,     AZ_X,     AZ_MINS,  AZ_V,     AZ_B,     AZ_DOT,   AZ_H,     AZ_G,     AZ_COMM,  AZ_K,     LM(_SHF, MOD_LSFT), 
+        KC_TAB,   AZ_Q,     AZ_C,     AZ_O,     AZ_P,     AZ_W,     AZ_J,     AZ_M,     AZ_D,     OSL(_1DK),AZ_Y,     AZ_LBRC,  AZ_RBRC,  AZ_BSLH,
+        KC_CAPS,  AZ_A,     KC_SS,    KC_EE,    KC_NN,    AZ_F,     AZ_L,     KC_RR,    KC_TT,    KC_II,    LT(FUNC,KC_U),      AZ_QUOT,   KC_ENT,
+        LM(_SHF, MOD_LSFT), AZ_Z,     AZ_X,     AZ_MINS,  AZ_V,     AZ_B,     AZ_DOT,   AZ_H,     AZ_G,     AZ_COMM,  AZ_K,     LM(_SHF, MOD_LSFT),
         KC_LCTL,  KC_LGUI,  LT(_SHF2,KC_BSPC),                  LT(_num_nav, KC_SPC),   LT(_SYM,KC_ENT),/*MO(_SYM),*/ FN_MAC,   MO(FN1),  KC_RCTL),
 
     [MAC_FN] = LAYOUT_ansi_61(
@@ -144,14 +144,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, AZ_EURO,  AZ_LQUOTFR,AZ_RQUOTFR,AZ_DLRS, AZ_PERC, AZ_CIR,  AZ_EPERL,  AZ_ASTER,  AZ_CROI,   AZ_AROB,   AZ_UNDER,AZ_PLUS, _______,
         _______, _______,  _______,   _______,   _______, _______, _______, _______,   _______,   AZ_EXCL,   _______,   AZ_LCBR, AZ_RCBR, AZ_BSLH,
         _______, _______,  _______,   _______,   _______, _______, _______, _______,   _______,   _______,   _______,   AZ_DQUO,          _______,
-        _______,           _______,   _______,   AZ_COMM, _______, _______, AZ_COLN,   _______,   _______,   AZ_SCLN,   _______,          _______, 
-        _______, _______,  _______,                                _______,                                  _______,   _______, _______, _______),
+        _______,           _______,   _______,   AZ_COMM, _______, _______, AZ_COLN,   _______,   _______,   AZ_SCLN,   _______,          _______,
+        _______, _______,  _______,                                AZ_INSEC,                                  _______,   _______, _______, _______),
 // _SHF2 sert pour la touche LALT qui fait SHIFT en hold pour ARSENIK
     [_SHF2] = LAYOUT_ansi_61(
         _______, AZ_EURO,   AZ_LQUOTFR, AZ_RQUOTFR, AZ_DLRS,  AZ_PERC,      AZ_CIR,    AZ_EPERL,  AZ_ASTER,  AZ_CROI,   AZ_AROB,   AZ_UNDER,AZ_PLUS,_______,
         _______, RSFT(AZ_Q),RSFT(AZ_C), RSFT(AZ_O), RSFT(AZ_P),RSFT(AZ_W),  RSFT(AZ_J),RSFT(AZ_M),RSFT(AZ_D),AZ_EXCL,   RSFT(AZ_Y),AZ_LCBR, AZ_RCBR,AZ_BSLH,
         _______, RSFT(AZ_A),RSFT(AZ_S), RSFT(AZ_E), RSFT(AZ_N),RSFT(AZ_F),  RSFT(AZ_L),RSFT(AZ_R),RSFT(AZ_T),RSFT(AZ_I),RSFT(AZ_U),AZ_DQUO,         _______,
-        _______, RSFT(AZ_Z),RSFT(AZ_X), RSFT(AZ_COMM),RSFT(AZ_V),RSFT(AZ_B),AZ_COLN,   RSFT(AZ_H),RSFT(AZ_G),AZ_SCLN,   RSFT(AZ_K)         ,_______,         
+        _______, RSFT(AZ_Z),RSFT(AZ_X), RSFT(AZ_COMM),RSFT(AZ_V),RSFT(AZ_B),AZ_COLN,   RSFT(AZ_H),RSFT(AZ_G),AZ_SCLN,   RSFT(AZ_K)         ,_______,
         _______,  _______,  _______,                              LT(_Snum_nav, KC_SPC),                                 _______,   _______,_______, _______),
 
     [_SYM] = LAYOUT_ansi_61(
@@ -160,10 +160,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CAPS,  AZ_LCBR,  AZ_LPRN,  AZ_RPRN,  AZ_RCBR,  AZ_EQL,   AZ_BSLH,  AZ_PLUS,  AZ_MINS,  AZ_SLSH,  AZ_DQUO,  _______,            KC_ENT,
         LM(_SSYM,MOD_LSFT),AZ_TIL,AZ_LBRC,AZ_RBRC,AZ_UNDS,AZ_HASH,  AZ_PIPE,  AZ_EXCL,  KC_COMM,  AZ_COLN,  RSFT(AZ_COMM),      LM(_SSYM,MOD_LSFT),
         KC_LCTL,  KC_LGUI,  LT(_SSYM,KC_BSPC),                                KC_SPC,                       _______,   FN_WIN,  MO(FN1),  KC_RCTL),
-    
+
     // je n’ai pas réussi à gérer les caractères unicodes comme ≤,≥,≃,≠, donc j’ai pris un peu de liberté (☺ et ♫)
     [_SSYM] = LAYOUT_ansi_61(
-        _______, _______,  _______,   _______,   _______, _______, _______,  _______,  _______,   _______,   _______,   _______, _______, _______, 
+        _______, _______,  _______,   _______,   _______, _______, _______,  _______,  _______,   _______,   _______,   _______, _______, _______,
         _______, _______,  _______,   _______,   AZ_HAPPY, AZ_PERM, _______,  AZ_MUSIC,  AZ_MULTIP, _______,   _______,   _______, _______, _______,
         _______, _______,  _______,   _______,   _______, _______, _______,AZ_PLUSMOINS,AZ_MACRON,AZ_DIVIS,   _______,   _______,          _______,
         _______,           _______,   _______,   _______, _______, AZ_BBARE, _______,  _______,   _______,   _______,   _______,          _______,
@@ -173,7 +173,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     AZ_PARAG, AZ_PIEDMOUCHE,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,
         KC_TAB,   AZ_ACIR,  AZ_CCED,  AZ_OE,    AZ_OCIR,  AZ_DEG,   AZ_SECT,  AZ_MICR,  AZ_UNDS,  AZ_DIAE,  AZ_UCIR,  KC_LBRC,  KC_RBRC,  KC_BSLS,
         KC_CAPS,  AZ_AGRV,  AZ_EACU,  AZ_EGRV,  AZ_ECIR,  AZ_NTILD, AZ_LPRN,  AZ_RPRN,  AZ_ICIR,  AZ_ITRE,  AZ_UGRV,  KC_QUOT,             KC_ENT,
-        OSL(_SDK),AZ_AE,    AZ_ESZET, AZ_QCADR, AZ_SCADR, AZ_CADR,  AZ_ETC,   AZ_https, KC_G,     AZ_MDOT,  AZ_COPYR,                    OSL(_SDK),    
+        OSL(_SDK),AZ_AE,    AZ_ESZET, AZ_QCADR, AZ_SCADR, AZ_CADR,  AZ_ETC,   AZ_https, KC_G,     AZ_MDOT,  AZ_COPYR,                    OSL(_SDK),
         TO(MAC_BASE),KC_LGUI, LT(_SDK,KC_BSPC),                               AZ_QUOTFR,                        MO(_SYM), FN_WIN, MO(FN1),KC_RCTL),
 
     [_SDK] = LAYOUT_ansi_61(
@@ -186,21 +186,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // mais je n’arrive pas à gérer l’unicode et la limite du nombre de layers est atteinte.
 
     [_num_nav] = LAYOUT_ansi_61(
-        KC_ESC,   G(KC_1),  G(KC_2),  G(KC_3),  G(KC_4),  G(KC_5),  G(KC_6),  G(KC_7),  G(KC_8), G(KC_9), G(KC_0),  _______,  _______,  _______, 
+        KC_ESC,   G(KC_1),  G(KC_2),  G(KC_3),  G(KC_4),  G(KC_5),  G(KC_6),  G(KC_7),  G(KC_8), G(KC_9), G(KC_0),  _______,  _______,  _______,
         KC_TAB,   KC_TAB,   KC_HOME,  KC_UP,    KC_END,   KC_PGUP,  AS(SLSH), AS(7),    AZ_8,    AZ_9,    _______,  _______,  _______,  _______,
         KC_CAPS,  KC_CAPS,  KC_LEFT,  KC_DOWN,  KC_RGHT,  KC_PGDN,  AS(MINS), AS(4),    AZ_5,    AZ_6,    AZ_0,     _______,            _______,
         LM(_Snum_nav, MOD_LSFT),C(AS(Z)),KC_VOLD,KC_MUTE,KC_VOLU, S(KC_TAB),AS(COMM),   AZ_1,    AZ_2,    AZ_3,     AS(DOT), LM(_Snum_nav, MOD_LSFT),
         KC_LCTL,  KC_LGUI,  LT(_Snum_nav,KC_DEL),                   KC_SPC,                               KC_ESC,   FN_WIN,  MO(FN1),   KC_RCTL),
 
     [_Snum_nav] = LAYOUT_ansi_61(
-        _______,   _______,   _______,    _______,    _______,    _______,    _______, _______,  _______,   _______,   _______,    _______, _______, _______,  
-        S(KC_TAB), S(KC_TAB), S(KC_HOME), S(KC_UP),   S(KC_END),  S(KC_PGUP), _______, AZ_EPERL, AZ_ASTER,  AZ_CROI,   _______,    _______, _______, _______, 
+        _______,   _______,   _______,    _______,    _______,    _______,    _______, _______,  _______,   _______,   _______,    _______, _______, _______,
+        S(KC_TAB), S(KC_TAB), S(KC_HOME), S(KC_UP),   S(KC_END),  S(KC_PGUP), _______, AZ_EPERL, AZ_ASTER,  AZ_CROI,   _______,    _______, _______, _______,
         _______,   _______,   S(KC_LEFT), S(KC_DOWN), S(KC_RGHT), S(KC_PGDN), _______, AZ_DLRS,  AZ_PERC,   AZ_CIR,    AZ_AROB,    _______,          _______,
-        _______,              _______,    _______,    _______,    _______,    _______, _______,  AZ_EURO,   AZ_LQUOTFR,AZ_RQUOTFR, _______,          _______,  
+        _______,              _______,    _______,    _______,    _______,    _______, _______,  AZ_EURO,   AZ_LQUOTFR,AZ_RQUOTFR, _______,          _______,
         _______, _______,     _______,                            _______,                                  _______,   _______,    _______, _______ ),
 
     [FUNC] = LAYOUT_ansi_61(
-        _______, _______, _______, _______, _______, _______, _______,  _______,  _______,   _______,   _______,   _______, _______, _______, 
+        _______, _______, _______, _______, _______, _______, _______,  _______,  _______,   _______,   _______,   _______, _______, _______,
         _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4, _______, _______,  _______,  _______,   _______,   _______,   _______, _______, _______,
         _______,   KC_F5,   KC_F6,   KC_F7,   KC_F8, _______, _______,  KC_RR,      KC_TT,     KC_II,   _______,   _______,          _______,
         _______,            KC_F9,  KC_F10,  KC_F11,  KC_F12, _______,  _______,  _______,   _______,   _______,   _______,          _______,
@@ -224,7 +224,7 @@ return true;
 }
 
 // ARSENIK ------------------------------------------------
-// 1. Définit à ARSENIK_HRM_TAPPING_TERM (300ms par défaut) 
+// 1. Définit à ARSENIK_HRM_TAPPING_TERM (300ms par défaut)
 //    le délai avant que les HRM s’activent sans modifier le
 //    TAPPING_TERM par défaut (200ms) des autres touches.
 // 2. Permet que les touches alt(shift/bckspc) et altgr(altgr/enter)
@@ -232,7 +232,7 @@ return true;
 //    mais aussi qu’elles soient considérées en hold dès qu’une autre touche est
 //    pressée sans devoir attendre TAPPING_TERM.
 
-// pour que ça fonctionne, ajouter 
+// pour que ça fonctionne, ajouter
 // #define TAPPING_TERM_PER_KEY
 // #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
 // dans keyboards\keychron\k9_max\ansi\rgb\config.h
@@ -247,13 +247,13 @@ static inline bool tap_keycode_used_in_text(uint16_t keycode) {
     // `tap_keycode <= KC_0` includes all letters and numbers, but also
     // `KC_NO` which is safer to include, since it is commonly used in the
     // keymap as a placeholder for complex actions on tap.
-     return (tap_keycode <= KC_0) || (tap_keycode == KC_SPC);   
+     return (tap_keycode <= KC_0) || (tap_keycode == KC_SPC);
 }
 
 // TAPPING_TERM est défini à 200ms par défaut dans quantum/action_taping.h
 // ARSENIK_HRM_TAPPING_TERM est défini à 300ms par défaut dans arsenik_config.h
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    return tap_keycode_used_in_text(keycode) ? ARSENIK_HRM_TAPPING_TERM : TAPPING_TERM;   
+    return tap_keycode_used_in_text(keycode) ? ARSENIK_HRM_TAPPING_TERM : TAPPING_TERM;
 }
 
 // nécessite #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY dans keyboards\keychron\k9_max\ansi\rgb\config.h
