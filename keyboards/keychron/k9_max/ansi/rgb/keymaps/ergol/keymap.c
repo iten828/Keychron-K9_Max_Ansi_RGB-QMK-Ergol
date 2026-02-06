@@ -34,6 +34,28 @@
 *  Win = Windows standard
 */
 
+/*
+    Il y’a le code nécessaire en principe pour Linux et Mac
+    Mais il faudrait le revoir, je ne m’en suis pas du tout occupé.
+    Ça ne fonctionne probablenment pas en l’état:
+    • J’ai ajouté des caractères supplémentaires par rapport à
+    la lib azerty d’origine sans me soucier que cela fonctionne
+    pour Mac ou Linux.
+    • Je ne me suis pas non plus occupé du tout de la détection
+    automatique de l’OS…
+*/
+
+/*
+    Il manque des choses non essentielles comme:
+    • le layer SHIFT+ALTGR est très incomplet (≤,≥,≠ par exemple)
+    • les touches mortes ^ ' ` ~ (mais la 1DK normale fonctionne parfaitement pour â,ä,à,ñ par exemple)
+    • le layer pour la touche morte secondaire sur la touche G (lettes grecques)
+    • l’espace insécable fine (SHIFT+SPC)
+    • et problablement d’autres choses
+    Essentiellement parceque je n’arrive pas à gérer l’unicode, ou parceque je n’ai pas cherché
+    à trop creuser (touches mortes accents) car intérêt est limité par rapport à l’effort à fournir.
+*/
+
 #include QMK_KEYBOARD_H
 #include "keychron_common.h"
 
@@ -145,14 +167,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______,  _______,   _______,   _______, _______, _______, _______,   _______,   AZ_EXCL,   _______,   AZ_LCBR, AZ_RCBR, AZ_BSLH,
         _______, _______,  _______,   _______,   _______, _______, _______, _______,   _______,   _______,   _______,   AZ_DQUO,          _______,
         _______,           _______,   _______,   AZ_COMM, _______, _______, AZ_COLN,   _______,   _______,   AZ_SCLN,   _______,          _______,
-        _______, _______,  _______,                                AZ_INSEC,                                  _______,   _______, _______, _______),
+        _______, _______,  _______,                                _______,                                  _______,   _______, _______, _______),
 // _SHF2 sert pour la touche LALT qui fait SHIFT en hold pour ARSENIK
     [_SHF2] = LAYOUT_ansi_61(
         _______, AZ_EURO,   AZ_LQUOTFR, AZ_RQUOTFR, AZ_DLRS,  AZ_PERC,      AZ_CIR,    AZ_EPERL,  AZ_ASTER,  AZ_CROI,   AZ_AROB,   AZ_UNDER,AZ_PLUS,_______,
         _______, RSFT(AZ_Q),RSFT(AZ_C), RSFT(AZ_O), RSFT(AZ_P),RSFT(AZ_W),  RSFT(AZ_J),RSFT(AZ_M),RSFT(AZ_D),AZ_EXCL,   RSFT(AZ_Y),AZ_LCBR, AZ_RCBR,AZ_BSLH,
         _______, RSFT(AZ_A),RSFT(AZ_S), RSFT(AZ_E), RSFT(AZ_N),RSFT(AZ_F),  RSFT(AZ_L),RSFT(AZ_R),RSFT(AZ_T),RSFT(AZ_I),RSFT(AZ_U),AZ_DQUO,         _______,
         _______, RSFT(AZ_Z),RSFT(AZ_X), RSFT(AZ_COMM),RSFT(AZ_V),RSFT(AZ_B),AZ_COLN,   RSFT(AZ_H),RSFT(AZ_G),AZ_SCLN,   RSFT(AZ_K)         ,_______,
-        _______,  _______,  _______,                              LT(_Snum_nav, KC_SPC),                                 _______,   _______,_______, _______),
+        _______,  _______,  _______,                              LT(_Snum_nav, KC_SPC/*AZ_INSEC*/),           LT(_SSYM,KC_ENT),   _______,_______, _______),
 
     [_SYM] = LAYOUT_ansi_61(
         KC_ESC,   AZ_SUP1,  AZ_SUP2,  AZ_SUP3,  KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,    KC_MINS,  KC_EQL,   KC_BSPC,
@@ -161,13 +183,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LM(_SSYM,MOD_LSFT),AZ_TIL,AZ_LBRC,AZ_RBRC,AZ_UNDS,AZ_HASH,  AZ_PIPE,  AZ_EXCL,  KC_COMM,  AZ_COLN,  RSFT(AZ_COMM),      LM(_SSYM,MOD_LSFT),
         KC_LCTL,  KC_LGUI,  LT(_SSYM,KC_BSPC),                                KC_SPC,                       _______,   FN_WIN,  MO(FN1),  KC_RCTL),
 
-    // je n’ai pas réussi à gérer les caractères unicodes comme ≤,≥,≃,≠, donc j’ai pris un peu de liberté (☺ et ♫)
+    // je n’ai pas réussi à gérer les caractères unicodes comme ≤,≥,≃,≠, donc j’ai pris un peu de liberté (☺, ♪, ♫, ←, →, ↔)
+    // j’ai respecté la spec Ergo-l pour l’espace insécable, (Altgr+Shift+SPC), mais on ne peut pas l’atteindre facilement…
+    // il faut utiliser le LSFT normal, pas possible avec ARSENIK (ALT+ALTGR+SPC), il faudrait 3 pouces…
     [_SSYM] = LAYOUT_ansi_61(
         _______, _______,  _______,   _______,   _______, _______, _______,  _______,  _______,   _______,   _______,   _______, _______, _______,
-        _______, _______,  _______,   _______,   AZ_HAPPY, AZ_PERM, _______,  AZ_MUSIC,  AZ_MULTIP, _______,   _______,   _______, _______, _______,
-        _______, _______,  _______,   _______,   _______, _______, _______,AZ_PLUSMOINS,AZ_MACRON,AZ_DIVIS,   _______,   _______,          _______,
+        _______, AZ_DARROW,AZ_LARROW, AZ_RARROW, AZ_HAPPY, AZ_PERM, AZ_NOTE2,  AZ_NOTE,  AZ_MULTIP,_______,  _______,   _______, _______, _______,
+        _______, _______,  _______,   _______,   _______, _______, _______,AZ_PLUSMOINS,AZ_MACRON,AZ_DIVIS,  _______,   _______,          _______,
         _______,           _______,   _______,   _______, _______, AZ_BBARE, _______,  _______,   _______,   _______,   _______,          _______,
-        _______, _______,  _______,                                _______,                                  _______,   _______, _______, _______),
+        _______, _______,  _______,                                AZ_INSEC,                                 _______,   _______, _______, _______),
 
     [_1DK] = LAYOUT_ansi_61(
         KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     AZ_PARAG, AZ_PIEDMOUCHE,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,
@@ -177,11 +201,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TO(MAC_BASE),KC_LGUI, LT(_SDK,KC_BSPC),                               AZ_QUOTFR,                        MO(_SYM), FN_WIN, MO(FN1),KC_RCTL),
 
     [_SDK] = LAYOUT_ansi_61(
-        KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,
-        KC_TAB,   AZ_ACIRM, AZ_CCEDM, AZ_OEM,   AZ_OCIRM, AZ_BULLET,XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  AZ_UCIRM, XXXXXXX,  XXXXXXX,  XXXXXXX,
+        KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,  KC_BSPC,
+        KC_TAB,   AZ_ACIRM, AZ_CCEDM, AZ_OEM,   AZ_OCIRM, AZ_BULLET,XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  AZ_UCIRM, XXXXXXX,  XXXXXXX, XXXXXXX,
         KC_CAPS,  AZ_AGRVM, AZ_EACUM, AZ_EGRVM, AZ_ECIRM, AZ_NTILDM,XXXXXXX,  XXXXXXX,  AZ_ICIRM, AZ_ITREM, AZ_UGRVM, XXXXXXX,            KC_ENT,
-        XXXXXXX,  AZ_AEM,   AZ_SESZET, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, AZ_BULLET,AZ_RGSTRD,                    XXXXXXX,
-        TO(MAC_BASE),KC_LGUI,XXXXXXX,                               KC_SPC,                                 XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_RCTL),
+        XXXXXXX,  AZ_AEM,   AZ_SESZET, XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX,  XXXXXXX, AZ_BULLET,AZ_RGSTRD,                    XXXXXXX,
+        TO(MAC_BASE),KC_LGUI,XXXXXXX,                               KC_SPC,                                  XXXXXXX, XXXXXXX,  XXXXXXX, KC_RCTL),
     // Idéalement, on pourrait ajouter un [_2DK] et un [_S2DK] pour les caractères grecs et grecs majuscules (touche G)
     // mais je n’arrive pas à gérer l’unicode et la limite du nombre de layers est atteinte.
 

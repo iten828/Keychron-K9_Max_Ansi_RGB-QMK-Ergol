@@ -215,7 +215,7 @@ void _emul_send_key(uint16_t keycode) {
         case AZ_MINS: 
             switch (_emul_os_mode) { 
                 case EMUL_OS_OSX: XKEY(X_EQL); break;            //OSX: TAP = - on = key  
-                default: UNSHIFT(XKEY(X_6)); break;                       //Win, Lin: TAP = - on 6 key
+                default: UNSHIFT(XKEY(X_6)); break;              //Win, Lin: TAP = - on 6 key
             } break;
 
         //emul SHIFT LAYER
@@ -228,8 +228,8 @@ void _emul_send_key(uint16_t keycode) {
         case AZ_INSEC:
             switch(_emul_os_mode) {
                 case EMUL_OS_OSX: UNSHIFT(OPTION(XKEY(X_SPC))); break; //OSX: TAP = insecable space on CMD+space key
-                case EMUL_OS_LINUX: LIN_UTF(0x00A0); break;          //Lin: UTF-00A0 = insecable space
-                case EMUL_OS_WIN: WINALT3(2,5,5); break;      //Win: ALT 255 = insec
+                case EMUL_OS_LINUX: LIN_UTF(0x00A0); break;            //Lin: UTF-00A0 = insecable space
+                case EMUL_OS_WIN: WINALT3(2,5,5); break;               //Win: ALT 255 = insec
             } break;
 
         case AZ_SCLN: 
@@ -592,27 +592,36 @@ void _emul_send_key(uint16_t keycode) {
             if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
             else UNMOD(WINALT4(0,2,4,7));
             break;
-
+        
         case AZ_HAPPY:
             if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
             else UNMOD(WINALT1(1));
             break;
-
-        case AZ_MUSIC:
+        
+        case AZ_NOTE:
+            if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
+            else UNMOD(WINALT2(1,3));
+            break;
+        
+        case AZ_NOTE2:
             if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
             else UNMOD(WINALT2(1,4));
             break;
-
-        case AZ_PARAG:
+        
+        case AZ_LARROW:
             if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
-            else UNMOD(WINALT4(0,1,6,7));
+            else UNMOD(WINALT2(2,7));
             break;
-
-        case AZ_PIEDMOUCHE:
+        
+        case AZ_RARROW:
             if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
-            else UNMOD(WINALT4(0,1,8,2));
+            else UNMOD(WINALT2(2,6));
             break;
-            
+        
+        case AZ_DARROW:
+            if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
+            else UNMOD(WINALT2(2,9));
+            break;
 // fin mes ajouts
 
         case AZ_LCBR:

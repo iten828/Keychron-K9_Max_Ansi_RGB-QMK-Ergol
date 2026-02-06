@@ -112,7 +112,11 @@ enum custom_keycodes_emul {
     AZ_MULTIP,
     AZ_DIVIS,
     AZ_HAPPY,
-    AZ_MUSIC,
+    AZ_NOTE,
+    AZ_NOTE2,
+    AZ_LARROW,
+    AZ_RARROW,
+    AZ_DARROW,
     AZ_PARAG,
     AZ_PIEDMOUCHE,
 // fin mes ajouts
