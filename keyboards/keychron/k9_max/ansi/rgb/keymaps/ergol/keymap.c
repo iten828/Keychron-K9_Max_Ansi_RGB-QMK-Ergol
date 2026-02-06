@@ -42,12 +42,6 @@
 #include <lib/arsenik/arsenik.h>
 #include "os_detection.h"
 
-// ARSENIK: il faut aussi définir TAPPING_TERM_PER_KEY et HOLD_ON_OTHER_KEY_PRESS_PER_KEY 
-// dans keyboards\keychron\k9_max\ansi\rgb\config.h
-// (pas sûr que ça soit nécessaire dans ce fichier keymap.c)
-#define TAPPING_TERM_PER_KEY
-#define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
-
 enum layers {
     MAC_BASE,
     MAC_FN,
@@ -166,16 +160,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CAPS,  AZ_LCBR,  AZ_LPRN,  AZ_RPRN,  AZ_RCBR,  AZ_EQL,   AZ_BSLH,  AZ_PLUS,  AZ_MINS,  AZ_SLSH,  AZ_DQUO,  _______,            KC_ENT,
         LM(_SSYM,MOD_LSFT),AZ_TIL,AZ_LBRC,AZ_RBRC,AZ_UNDS,AZ_HASH,  AZ_PIPE,  AZ_EXCL,  KC_COMM,  AZ_COLN,  RSFT(AZ_COMM),      LM(_SSYM,MOD_LSFT),
         KC_LCTL,  KC_LGUI,  LT(_SSYM,KC_BSPC),                                KC_SPC,                       _______,   FN_WIN,  MO(FN1),  KC_RCTL),
-
+    
+    // je n’ai pas réussi à gérer les caractères unicodes comme ≤,≥,≃,≠, donc j’ai pris un peu de liberté (☺ et ♫)
     [_SSYM] = LAYOUT_ansi_61(
         _______, _______,  _______,   _______,   _______, _______, _______,  _______,  _______,   _______,   _______,   _______, _______, _______, 
-        _______, _______,  _______,   _______,   _______, AZ_PERM, _______,  _______,  AZ_MULTIP, _______,   _______,   _______, _______, _______,
-        _______, _______,  _______,   _______,   _______, _______, _______,AZ_PLUSMOINS,AZ_MACRON,_______,   _______,   _______,          _______,
+        _______, _______,  _______,   _______,   AZ_HAPPY, AZ_PERM, _______,  AZ_MUSIC,  AZ_MULTIP, _______,   _______,   _______, _______, _______,
+        _______, _______,  _______,   _______,   _______, _______, _______,AZ_PLUSMOINS,AZ_MACRON,AZ_DIVIS,   _______,   _______,          _______,
         _______,           _______,   _______,   _______, _______, AZ_BBARE, _______,  _______,   _______,   _______,   _______,          _______,
         _______, _______,  _______,                                _______,                                  _______,   _______, _______, _______),
 
     [_1DK] = LAYOUT_ansi_61(
-        KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,
+        KC_ESC,   KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     KC_6,     KC_7,     AZ_PARAG, AZ_PIEDMOUCHE,     KC_0,     KC_MINS,  KC_EQL,   KC_BSPC,
         KC_TAB,   AZ_ACIR,  AZ_CCED,  AZ_OE,    AZ_OCIR,  AZ_DEG,   AZ_SECT,  AZ_MICR,  AZ_UNDS,  AZ_DIAE,  AZ_UCIR,  KC_LBRC,  KC_RBRC,  KC_BSLS,
         KC_CAPS,  AZ_AGRV,  AZ_EACU,  AZ_EGRV,  AZ_ECIR,  AZ_NTILD, AZ_LPRN,  AZ_RPRN,  AZ_ICIR,  AZ_ITRE,  AZ_UGRV,  KC_QUOT,             KC_ENT,
         OSL(_SDK),AZ_AE,    AZ_ESZET, AZ_QCADR, AZ_SCADR, AZ_CADR,  AZ_ETC,   AZ_https, KC_G,     AZ_MDOT,  AZ_COPYR,                    OSL(_SDK),    
@@ -187,6 +182,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_CAPS,  AZ_AGRVM, AZ_EACUM, AZ_EGRVM, AZ_ECIRM, AZ_NTILDM,XXXXXXX,  XXXXXXX,  AZ_ICIRM, AZ_ITREM, AZ_UGRVM, XXXXXXX,            KC_ENT,
         XXXXXXX,  AZ_AEM,   AZ_SESZET, XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, AZ_BULLET,AZ_RGSTRD,                    XXXXXXX,
         TO(MAC_BASE),KC_LGUI,XXXXXXX,                               KC_SPC,                                 XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_RCTL),
+    // Idéalement, on pourrait ajouter un [_2DK] et un [_S2DK] pour les caractères grecs et grecs majuscules (touche G)
+    // mais je n’arrive pas à gérer l’unicode et la limite du nombre de layers est atteinte.
 
     [_num_nav] = LAYOUT_ansi_61(
         KC_ESC,   G(KC_1),  G(KC_2),  G(KC_3),  G(KC_4),  G(KC_5),  G(KC_6),  G(KC_7),  G(KC_8), G(KC_9), G(KC_0),  _______,  _______,  _______, 
@@ -195,7 +192,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LM(_Snum_nav, MOD_LSFT),C(AS(Z)),KC_VOLD,KC_MUTE,KC_VOLU, S(KC_TAB),AS(COMM),   AZ_1,    AZ_2,    AZ_3,     AS(DOT), LM(_Snum_nav, MOD_LSFT),
         KC_LCTL,  KC_LGUI,  LT(_Snum_nav,KC_DEL),                   KC_SPC,                               KC_ESC,   FN_WIN,  MO(FN1),   KC_RCTL),
 
-    // les S() sur les touches de navigation sont utiles pour les sélections (par exemple SHIFT-LEFT pour sélectionner du texte)
     [_Snum_nav] = LAYOUT_ansi_61(
         _______,   _______,   _______,    _______,    _______,    _______,    _______, _______,  _______,   _______,   _______,    _______, _______, _______,  
         S(KC_TAB), S(KC_TAB), S(KC_HOME), S(KC_UP),   S(KC_END),  S(KC_PGUP), _______, AZ_EPERL, AZ_ASTER,  AZ_CROI,   _______,    _______, _______, _______, 

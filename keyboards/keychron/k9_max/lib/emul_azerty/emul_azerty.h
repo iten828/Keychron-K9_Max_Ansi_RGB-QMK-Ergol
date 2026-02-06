@@ -110,6 +110,11 @@ enum custom_keycodes_emul {
     AZ_ESZET,
     AZ_SESZET,
     AZ_MULTIP,
+    AZ_DIVIS,
+    AZ_HAPPY,
+    AZ_MUSIC,
+    AZ_PARAG,
+    AZ_PIEDMOUCHE,
 // fin mes ajouts
     AZ_AT,  
     AZ_MINS, 

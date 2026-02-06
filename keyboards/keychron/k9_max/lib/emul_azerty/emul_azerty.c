@@ -587,6 +587,32 @@ void _emul_send_key(uint16_t keycode) {
             if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
             else UNMOD(WINALT4(0,2,1,5));
             break;
+
+        case AZ_DIVIS:
+            if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
+            else UNMOD(WINALT4(0,2,4,7));
+            break;
+
+        case AZ_HAPPY:
+            if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
+            else UNMOD(WINALT1(1));
+            break;
+
+        case AZ_MUSIC:
+            if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
+            else UNMOD(WINALT2(1,4));
+            break;
+
+        case AZ_PARAG:
+            if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
+            else UNMOD(WINALT4(0,1,6,7));
+            break;
+
+        case AZ_PIEDMOUCHE:
+            if (_emul_os_mode == EMUL_OS_OSX) OPTION(XKEY(X_RBRC))
+            else UNMOD(WINALT4(0,1,8,2));
+            break;
+            
 // fin mes ajouts
 
         case AZ_LCBR:
